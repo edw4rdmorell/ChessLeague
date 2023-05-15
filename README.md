@@ -1,5 +1,7 @@
 # ChessLeague
 
+![Crown](Assets/Images/Crown.ong)
+
 - [ChessLeague](#chessleague)
   - [Documents](#documents)
     - [Memòria](#memòria)
