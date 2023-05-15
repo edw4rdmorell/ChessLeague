@@ -21,7 +21,7 @@ Podeu trobar la presentació a [Aquí](Documentaci%C3%B3/Presentacio.pdf).
 
 ### Manual d'usuari
 
-Podeu trobar el manual d'usuari a [Aquí](Documentaci%C3%B3/ManulUsuari.md).
+Podeu trobar el manual d'usuari a [Aquí](Documentaci%C3%B3/ManualUsuari.md).
 
 ### Pla d'empresa
 
