@@ -1,13 +1,12 @@
 # ChessLeague
-
-![Crown](./Assets/Images/crown.png)
-
 - [ChessLeague](#chessleague)
   - [Documents](#documents)
     - [Memòria](#memòria)
     - [Presentació](#presentació)
     - [Manual d'usuari](#manual-dusuari)
     - [Pla d'empresa](#pla-dempresa)
+
+![Crown](./Assets/Images/crown.png)
 
 ## Documents
 
