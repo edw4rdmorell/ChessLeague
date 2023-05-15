@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chess League</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="chess-league">Chess League</h1>
+<h2 id="taula-de-continguts">Taula de continguts</h2>
+<ul>
+<li><a href="#chess-league">Chess League</a>
+<ul>
+<li><a href="#taula-de-continguts">Taula de continguts</a></li>
+<li><a href="#integrants-del-projecte">Integrants del projecte</a></li>
+<li><a href="#introducci%C3%B3-i-objectius">Introducció i objectius</a>
+<ul>
+<li><a href="#descripci%C3%B3-general"><strong>Descripció general</strong></a></li>
+<li><a href="#motivaci%C3%B3-a-fer-el-projecte"><strong>Motivació a fer el projecte</strong></a></li>
+<li><a href="#finalitats-del-projecte"><strong>Finalitats del projecte</strong></a></li>
+<li><a href="#alternatives-a-la-construcci%C3%B3"><strong>Alternatives a la construcció</strong></a></li>
+<li><a href="#tria-de-llenguatges-de-programaci%C3%B3-i-sgbd"><strong>Tria de llenguatges de programació i SGBD</strong></a></li>
+</ul>
+</li>
+<li><a href="#preparaci%C3%B3-del-projecte">Preparació del projecte</a>
+<ul>
+<li><a href="#an%C3%A0lisi-disseny-i-construcci%C3%B3-del-projecte"><strong>Anàlisi, disseny i construcció del projecte</strong></a></li>
+<li><a href="#fases"><strong>Fases</strong></a></li>
+<li><a href="#temporitzaci%C3%B3"><strong>Temporització</strong></a></li>
+<li><a href="#diagrama-de-gantt"><strong>Diagrama de Gantt</strong></a></li>
+<li><a href="#planificaci%C3%B3-i-seguiment"><strong>Planificació i seguiment</strong></a></li>
+</ul>
+</li>
+<li><a href="#aspectes-t%C3%A8cnics">Aspectes tècnics</a>
+<ul>
+<li><a href="#requeriments"><strong>Requeriments</strong></a></li>
+<li><a href="#%C3%A0mbit-i-camp-del-projecte"><strong>Àmbit i camp del projecte</strong></a></li>
+<li><a href="#requeriments-no-funcionals"><strong>Requeriments no funcionals</strong></a></li>
+<li><a href="#diagrames-de-casos-d%C3%BAs"><strong>Diagrames de casos d'ús</strong></a></li>
+<li><a href="#fitxes-de-casos-d%C3%BAs"><strong>Fitxes de casos d'ús</strong></a></li>
+<li><a href="#diagrames-dactivitat"><strong>Diagrames d'activitat</strong></a></li>
+<li><a href="#diagrama-de-classes"><strong>Diagrama de classes</strong></a>
+<ul>
+<li><a href="#diagrama-de-cartes"><strong>Diagrama de &quot;Cartes&quot;</strong></a></li>
+<li><a href="#diagrama-de-tauler"><strong>Diagrama de &quot;Tauler&quot;</strong></a></li>
+<li><a href="#diagrama-de-menus"><strong>Diagrama de &quot;Menus&quot;</strong></a></li>
+<li><a href="#diagrama-de-cameres"><strong>Diagrama de &quot;Cameres&quot;</strong></a></li>
+</ul>
+</li>
+<li><a href="#disseny-modular-del-projecte"><strong>Disseny modular del projecte</strong></a></li>
+<li><a href="#estructura-dels-m%C3%B2duls-del-projecte"><strong>Estructura dels mòduls del projecte</strong></a></li>
+<li><a href="#estructura-de-les-dades"><strong>Estructura de les dades</strong></a></li>
+<li><a href="#model-base-de-dades-i-correlaci%C3%B3"><strong>Model base de dades i correlació</strong></a></li>
+<li><a href="#descripci%C3%B3-de-les-interf%C3%ADcies-i-lui"><strong>Descripció de les interfícies i l'UI</strong></a></li>
+<li><a href="#seguretat-en-les-dades"><strong>Seguretat en les dades</strong></a></li>
+<li><a href="#c%C3%B2pies-de-seguretat"><strong>Còpies de seguretat</strong></a></li>
+</ul>
+</li>
+<li><a href="#errors-i-problemes-durant-el-desenvolupament">Errors i problemes durant el desenvolupament</a></li>
+<li><a href="#en-l%C3%ADnia">En línia</a></li>
+<li><a href="#mec%C3%A0niques-del-joc">Mecàniques del joc</a>
+<ul>
+<li><a href="#cartes"><strong>Cartes</strong></a></li>
+<li><a href="#regles"><strong>Regles</strong></a></li>
+</ul>
+</li>
+<li><a href="#seguiment-diari">Seguiment diari</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#bibliografia">Bibliografia</a></li>
+<li><a href="#comentari-personal">Comentari Personal</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="integrants-del-projecte">Integrants del projecte</h2>
+<ul>
+<li>Eduardo Morell Muniz</li>
+<li>Sergi Díaz Leiva</li>
+</ul>
+<h2 id="introducció-i-objectius">Introducció i objectius</h2>
+<h3 id="descripció-general"><strong>Descripció general</strong></h3>
+<p>Joc d'escacs en línia (Jugador <em>vs.</em> Jugador) amb un sistema de cartes per a fer-ho més divertit i entretingut. El projecte s'ha desenvolupat amb el motor de videojocs Unity.</p>
+<h3 id="motivació-a-fer-el-projecte"><strong>Motivació a fer el projecte</strong></h3>
+<p>Eduardo Morell:</p>
+<blockquote>
+<p>El meu desenvolupament personal com a programador i la meva passió per aquesta professió m'ha portat a fer aquest projecte. El fet de poder crear un videojoc i poder-lo compartir amb altres persones és una cosa que m'apassiona i m'encanta.</p>
+</blockquote>
+<p>Sergi Díaz:</p>
+<blockquote>
+<p>Poder crear un joc d'Android que sigui completament en línia, que sigui funcional i poder fer-lo en un temps de producció curt és un repte que m'agradaria aconseguir.</p>
+</blockquote>
+<h3 id="finalitats-del-projecte"><strong>Finalitats del projecte</strong></h3>
+<ul>
+<li>Aprendre a desenvolupar un videojoc.</li>
+<li>Agafar un joc de taula i portar-lo a un videojoc amb Unity.</li>
+<li>Fer modificacions i afegir funcionalitats.</li>
+<li>Aprendre a incorporar funcionalitats en línia.</li>
+<li>Manejar la comunicació entre clients i servidor.</li>
+<li>Creació i adaptació de la base de dades.</li>
+<li>Creació i adaptació d'una API.</li>
+<li>Aprendre a plasmar un disseny i idea en un projecte real.</li>
+<li>Fer un disseny modular i escalable.</li>
+<li>Planificar i seguir el projecte.</li>
+</ul>
+<h3 id="alternatives-a-la-construcció"><strong>Alternatives a la construcció</strong></h3>
+<p>Aquestes són les alternatives que s'ha considerat per a la construcció del projecte:</p>
+<ul>
+<li>Motor de gràfic: <strong>Unity</strong>, Godot, Unreal Engine.</li>
+<li>Sistema de BDD: <strong>MongoDB Realms</strong>, MySQL, SQLite, Firebase, MongoDB.</li>
+</ul>
+<h3 id="tria-de-llenguatges-de-programació-i-sgbd"><strong>Tria de llenguatges de programació i SGBD</strong></h3>
+<p>Llenguatge de programació: <strong>C#.</strong> És el llenguatge de programació de Unity. És un llenguatge orientat a objectes molt potent i flexible que ens ofereix moltes possibilitats a l'hora de desenvolupar el projecte.</p>
+<p>EL SGBD que s'ha utilitzat és <strong>MongoDB Realms</strong>. És un SGBD derivat del MongoDB molt flexible i escalable per a aplicacions en línia. És molt fàcil d'usar i té una interfície molt intuïtiva.</p>
+<hr>
+<h2 id="preparació-del-projecte">Preparació del projecte</h2>
+<h3 id="anàlisi-disseny-i-construcció-del-projecte"><strong>Anàlisi, disseny i construcció del projecte</strong></h3>
+<p>El primer pas va ser realitzar una versió del joc d'escacs (sense cap funcionalitat en línia) per consola. Aquesta versió ens va servir per poder establir les bases del projecte i tenir un disseny de la lògica del joc i de les classes que s'usarien.</p>
+<p>Un cop teníem el disseny de la lògica del joc, vam adaptar el disseny a Unity. Vam crear les classes i els scripts necessaris per a poder fer el joc. Aquesta part va ser la més llarga i complicada, ja que vam haver de fer molts canvis i adaptacions per a poder fer el joc. Com no teníem molta experiència amb Unity, vam haver de fer moltes proves i cercar molta informació per a poder fer les diferents funcionalitats.</p>
+<p>Al mateix temps, vam començar a fer la part en línia. Això inclou la cerca de diferents SGBD, trobar el sistema més òptim per al nostre cas i que ens permetés fer el que volíem. Vam fer proves amb diferents SGBD i finalment vam decidir fer servir MongoDB Realms. Aquest SGBD ens permet complir amb els requisits del projecte i és relativament fàcil d'emprar.</p>
+<p>Per al poc temps disponible, vam decidir fer un disseny molt simple i bàsic. Això ens va permetre tenir un disseny molt escalable i modular. Així, si en un futur volem afegir més funcionalitats, serà molt més fàcil i ràpid. Moltes de les decisions del disseny es van prendre en funció del temps que teníem disponible. Per exemple, vam decidir no fer un sistema de inici de sessió i registre perquè no teníem temps suficient per a fer-ho.</p>
+<p>El disseny del projecte el vàrem realitzar a mesura que anàvem fent el mateix, ja que, en fer servir una tecnologia que no domina'm i intentar incloure funcionalitat que no havíem fet mai, era molt difícil saber com fer-ho i quines classes i scripts necessitàvem.</p>
+<h3 id="fases"><strong>Fases</strong></h3>
+<p>El desenvolupament del projecte es pot dividir en 5 fases:</p>
+<ol>
+<li><strong>Fase de disseny i planificació.</strong> En aquesta fase es va fer el disseny de la lògica del joc i es va planificar el projecte. Es va fer un diagrama de Gantt i un seguiment diari del projecte.</li>
+<li><strong>Fase de desenvolupament del joc.</strong> En aquesta fase es va desenvolupar el joc. Es va crear el tauler, les peces, els scripts de moviment, etc.</li>
+<li><strong>Fase de desenvolupament en línia.</strong> En aquesta fase es va desenvolupar la part en línia. Es va crear la base de dades, l'API i els scripts de comunicació entre el client i el servidor.</li>
+<li><strong>Fase de test i correcció d'errors.</strong> En aquesta fase es va fer la correcció d'errors i es va fer el test del joc.</li>
+<li><strong>Fase de documentació.</strong> En aquesta fase es va fer la documentació del projecte. Incloent el pla d'empresa, la memòria i la presentació.</li>
+</ol>
+<h3 id="temporització"><strong>Temporització</strong></h3>
+<p>Aquesta temporització representa el temps real de desenvolupament.</p>
+<p>La fase 1 es va realitzar durant les primeres dues setmanes del projecte.</p>
+<p>Les fases 2, 3 i 4 s'han fet de forma simultània durant la llargària del projecte. Ja que anàvem fent el joc i la part en línia al mateix temps, duent a terme proves i correccions de forma simultània.</p>
+<p>La Fase 5 s'ha fet durant les últimes dues setmanes del projecte. S'ha portat a cap de forma simultània amb la fase 4.</p>
+<p>És una descripció un poc generalitzada, ja que, com s'ha comentat anteriorment, les fases 2, 3 i 4 s'han realitzat de forma simultània degut a la nostra inexpertesa amb Unity i MongoDB Realms. I em botat d'un apartat a l'altre sense realment dur un control d'aquests canvis.</p>
+<h3 id="diagrama-de-gantt"><strong>Diagrama de Gantt</strong></h3>
+<p>Els diferents apartats mencionats anteriorment en <a href="#fases">les fases del projecte</a> es poden veure reflectits de manera desglosada en el diagrama de Gantt. Aquest diagrama ens mostra la planificació del projecte i el temps teoric (calculat inicial) que s'hauria d'haver dedicat a cada apartat.</p>
+<table>
+<thead>
+<tr>
+<th>Chess League</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Planifiació inicial</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ACTIVITAT</td>
+<td>INICI DEL PLAN</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SETMANES</td>
+<td></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Planifiació inicial</td>
+<td>1</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Funcionalitat Basica Escacs</td>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cerca d'Informació Jocs Online</td>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementació Online + F. Bàsica</td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Disseny GUI</td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementació GUI</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Disseny BDD</td>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Implementació BDD en Cloud</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Connexió BDD amb Joc</td>
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Funcionalitats Especials</td>
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Documentació i Testing</td>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Desplegament App</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Actualitzacions</td>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="planificació-i-seguiment"><strong>Planificació i seguiment</strong></h3>
+<p>La planificació del projecte es va fer amb un diagrama de Gantt (<a href="#diagrama-de-gantt">Apartat anterior</a>) i el seguiment es va fer amb apunts diaris a un document de Google Docs.</p>
+<hr>
+<h2 id="aspectes-tècnics">Aspectes tècnics</h2>
+<h3 id="requeriments"><strong>Requeriments</strong></h3>
+<ul>
+<li>Per a la instal·lació i execució del projecte:</li>
+<li>Unity 2021.3.4f1</li>
+<li>Visual Studio 2022</li>
+</ul>
+<h3 id="àmbit-i-camp-del-projecte"><strong>Àmbit i camp del projecte</strong></h3>
+<p>L'àmbit del projecte és l'entreteniment i el camp és el dels jocs d'estratègia.</p>
+<h3 id="requeriments-no-funcionals"><strong>Requeriments no funcionals</strong></h3>
+<ul>
+<li>Dispositiu mòbil amb Android 4.4 o superior.</li>
+<li>Connexió a internet.</li>
+<li>Dos jugadors per partida.</li>
+</ul>
+<h3 id="diagrames-de-casos-dús"><strong>Diagrames de casos d'ús</strong></h3>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\cas2.png" alt="Diagrama de casos d'ús 1">
+<img src="file:///g:\My Drive\ChessLeague\Documentación\img\cas1.png" alt="Diagrama de casos d'ús 2"></p>
+<h3 id="fitxes-de-casos-dús"><strong>Fitxes de casos d'ús</strong></h3>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\fitxacas1.png" alt="Fitxa de cas d'ús 1"></p>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\fitxacas2.png" alt="Fitxa de cas d'ús 2"></p>
+<h3 id="diagrames-dactivitat"><strong>Diagrames d'activitat</strong></h3>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\Activitats.png" alt="Diagrama d'activitat"></p>
+<h3 id="diagrama-de-classes"><strong>Diagrama de classes</strong></h3>
+<h4 id="diagrama-de-cartes"><strong>Diagrama de &quot;Cartes&quot;</strong></h4>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\CardClass.png" alt="Diagrama &quot;Cartes&quot;"></p>
+<h4 id="diagrama-de-tauler"><strong>Diagrama de &quot;Tauler&quot;</strong></h4>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\ChessClass.png" alt="Diagrama &quot;Tauler&quot;"></p>
+<h4 id="diagrama-de-menus"><strong>Diagrama de &quot;Menus&quot;</strong></h4>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\MenuClass.png" alt="Diagrama &quot;Menus&quot;"></p>
+<h4 id="diagrama-de-cameres"><strong>Diagrama de &quot;Cameres&quot;</strong></h4>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\CameraClass.png" alt="Diagrama &quot;Cameres&quot;"></p>
+<h3 id="disseny-modular-del-projecte"><strong>Disseny modular del projecte</strong></h3>
+<p>Per obtenir un disseny modular, s'ha fet servir diferents <em>GameObjects</em> per a cada element del joc. Aquests <em>GameObjects</em> s'especifiquen en el següent apartat.</p>
+<h3 id="estructura-dels-mòduls-del-projecte"><strong>Estructura dels mòduls del projecte</strong></h3>
+<p>Al Menú principal podem veure els següents elements:</p>
+<ul>
+<li><code>MenuController</code>: Controlador del menú principal. <img src="file:///g:\My Drive\ChessLeague\Documentación\img\MenuController.png" alt="MenuController"></li>
+<li><code>AudioManager</code>: Controlador de l'àudio. <img src="file:///g:\My Drive\ChessLeague\Documentación\img\AudioManager.png" alt="AudioManager"></li>
+</ul>
+<p>En la partida podem veure els següents elements:</p>
+<ul>
+<li><code>Board</code>: Tauler de joc.
+<ul>
+<li><code>Board</code>: Controlador del tauler de joc.
+<ul>
+<li><img src="file:///g:\My Drive\ChessLeague\Documentación\img\BoardController.png" alt="BoardController"></li>
+</ul>
+</li>
+<li><code>InputManager</code>: Controlador de les entrades de l'usuari.
+<ul>
+<li><img src="file:///g:\My Drive\ChessLeague\Documentación\img\InputManager.png" alt="InputManager"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Camera</code>: Càmera de joc.
+<ul>
+<li><img src="file:///g:\My Drive\ChessLeague\Documentación\img\CameraController.png" alt="Camera"></li>
+</ul>
+</li>
+<li><code>RealmControllerManager</code>: Controlador de la base de dades i les connexions en linea.
+<ul>
+<li><img src="file:///g:\My Drive\ChessLeague\Documentación\img\RealmControllerManager.png" alt="RealmControllerManager"></li>
+</ul>
+</li>
+</ul>
+<p>Amb aquests elements i els seus <em>scripts</em> s'ha aconseguit un disseny modular del projecte.</p>
+<h3 id="estructura-de-les-dades"><strong>Estructura de les dades</strong></h3>
+<p>Les dades del projecte es guarden en una base de dades no relacional, MongoDB Realms. Aquesta base de dades està formada per dues col·leccions, una per a les partides informacions de les partides i una altra per els estats de les partides (taulers, cartes, etc.). Aquestes dues col·leccions estan relacionades a través de la Id de la partida.</p>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\gameDataSchema.png" alt="GameData Schema"></p>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\boarddataschema.png" alt="BoardData Schema">
+<strong>Exemple:</strong></p>
+<p>Game Data</p>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\GameData.png" alt="GameData"></p>
+<p>Board Data</p>
+<p><img src="file:///g:\My Drive\ChessLeague\Documentación\img\BoardData.png" alt="BoardData"></p>
+<h3 id="model-base-de-dades-i-correlació"><strong>Model base de dades i correlació</strong></h3>
+<ul>
+<li>Base de dades no relacional, correlacionades a través de camps com la Id del jugador i la Id de la partida.</li>
+</ul>
+<h3 id="descripció-de-les-interfícies-i-lui"><strong>Descripció de les interfícies i l'UI</strong></h3>
+<p>En el menú principal podem veure els següents elements:</p>
+<ul>
+<li><strong>Botó Jugar</strong>: Inicia una partida.</li>
+<li><strong>Botó Sortir</strong>: Tanca l'aplicació.</li>
+</ul>
+<p>Per limitacions de temps, de moment només hi ha una pantalla de joc, però en un futur es podria afegir una pantalla de configuració, una pantalla de selecció de peces, taulers, dissenys de cartes, etc.</p>
+<p>En la pantalla de joc podem veure els següents elements:</p>
+<ul>
+<li><strong>Tauler</strong>: És el tauler de joc, on es desenvolupa la partida.</li>
+<li><strong>Cartes (Inferior)</strong>: Són les cartes que té el jugador per a utilitzar durant la partida.</li>
+<li><strong>Cartes (Superior)</strong>: Són les cartes que té el contrincant per a usar durant la partida.</li>
+<li><strong>Peça Rei (A dalt-Esquerra)</strong>: És la peça que representa el rei del jugador. Indica el torn actual.</li>
+</ul>
+<p>Per a la creació de la interfície s'ha fet ús del sistema d'UI de Unity. Aquest sistema permet crear interfícies de forma visual i molt intuïtiva.</p>
+<p>Els jugadors interactuen amb l'interfície a través de la pantalla tàctil del dispositiu mòbil. Aquesta interacció es fa a través d'un conjunt de classes i sistemes.</p>
+<ul>
+<li>'InputManager': Classe que gestiona l'entrada de l'usuari, detecta, comprova i realitza els moviments de les peces. Primer es selecciona una peça i després es selecciona una casella per a moure-la. Si el moviment és vàlid, es fa. Si no, res.</li>
+<li>'EventTrigger': El component 'EventTrigger' de Unity permet detectar els diferents esdeveniments que es produeixen a l'interfície. Aquest component s'utilitza per a detectar els esdeveniments de 'PointerTap', 'BeginDrag' i 'EndDrag' de les cartes. Aquests esdeveniments s'fan servir per a detectar quan l'usuari toca una carta, comença a moure-la i la deixa anar. Si toca la carta, es fa més gran i es mostra la informació de la carta. Si l'arrossega al centre de la pantalla, s'activa el seu efecte. Si la deixa anar en un altre lloc, torna a la seva posició original.</li>
+</ul>
+<h3 id="seguretat-en-les-dades"><strong>Seguretat en les dades</strong></h3>
+<ul>
+<li>Pensaments diversos durant el desenvolupament del joc per evitar modificacions externes</li>
+<li>Modificació permisos i triggers al Mongo Atlas per evitar accés i connexions no permeses, l'usuari només pot modificar dades externes a través del api, i algunes pròpies com les monedes del jugador tenen un trigger a la base de dades, que ho limita.</li>
+</ul>
+<h3 id="còpies-de-seguretat"><strong>Còpies de seguretat</strong></h3>
+<ul>
+<li>
+<p>Copies de seguretat del projecte de unity cada cert temps per evitar algun bug que fes que no funcioni el joc a nivell de compliació o d'arxius interns del joc.</p>
+</li>
+<li>
+<p>No tenim copia de seguretat de la base de dades, tot i que la schema i la conexió estan respaldades en cas de que es borres o deixès de funcionar la base de dades. I ara mateix l'ús important de la base de dades es servir de pont per a jugar la partida online i les dades que hi siguin allà encara no s'utilitzen per res, a futur servirien per fer estadistiques del jugador, historial, etc.</p>
+</li>
+</ul>
+<h2 id="errors-i-problemes-durant-el-desenvolupament">Errors i problemes durant el desenvolupament</h2>
+<p>Hem tingut algunes dificultats al llarg del desenvolupament del projecte, algunes d'elles són:</p>
+<ul>
+<li>Fer una lógica robusta i que funcioni correctament.</li>
+<li>Traslladar la lógica del joc a la representació gràfica en Unity.</li>
+<li>Dissenyar el integrar el sistema de cartes amb la lógica d'escacs.</li>
+<li>Implementar aquest sistema. El poder interactuar amb les cartes i que aquestes tinguin efectes sobre la partida.</li>
+<li>Dissenyar i implementar el sistema de joc en línia.</li>
+<li>Dissenyar i implementar el sistema de base de dades.</li>
+<li>Fer el seguiment del projecte i la documentació, ja que l'apartat tècnic del projecte ha estat molt extens i ens ha consumit moltes hores.</li>
+</ul>
+<hr>
+<h2 id="en-línia">En línia</h2>
+<p>Fem servir el sistema de MongoDB Realms per a gestionar la base de dades i el mitjà per el qual els jugadors es poden connectar entre ells.</p>
+<p>MongoDB Realms ens proporciona un <code>package</code> per el qual podem interactuar amb la seva API. Crear l'objecte amb l'informació de la partida, jugador, etc. I crear o modificar metodes per a interactuar amb la base de dades. Ja sigui per a crear una partida, un jugador, o per a actualitzar la informació de la partida.</p>
+<p>Gràcies a aquesta API podem fer que els jugadors es puguin connectar entre ells i jugar una partida en línia. Enviant, rebent i comprovant la informació que tenen els jugadors en local amb la que hi ha a la base de dades.</p>
+<p>Per exemple: Per detectar que un torn s'ha jugat, tenim una variable <code>turns</code>, que és un comptador dels torns. Cada 3 segons, comprovem si el valor de la variable <code>turns</code> de la base de dades és major a la que tenim en local. Si és diferent, vol dir que el contrincant ha jugat un torn i nosaltres no, per tant, actualitzem la informació de la partida en local, obtenint l'estat del tauler, les cartes i el torn actual.</p>
+<hr>
+<h2 id="mecàniques-del-joc">Mecàniques del joc</h2>
+<p>El joc es pot dividir en dues parts, la part dels escacs, i la part de les cartes. A continuació es descriuen les mecàniques de cada part.</p>
+<ul>
+<li>Moviment de les peces. Es manté el moviment de les peces, com en els escacs normals.</li>
+<li>Cartes de joc. Les cartes permeten al jugador fer accions que no es poden fer en els escacs normals, no sols relacionat amb moviments de les peces sinó que també es poden portar a cap modificacions en el taulell per la resta de la partida com pot ser la carta &quot;Gran Muro&quot; (s'expliquen les cartes disponibles més endavant) que permet posar un mur en el taulell que impedeixi el pas de les peces.</li>
+</ul>
+<h3 id="cartes"><strong>Cartes</strong></h3>
+<p>Les cartes que, de moment, es poden trobar en el joc són les següents:</p>
+<ul>
+<li><strong>Gran Muro</strong>: Aquesta carta permet posar un mur en el taulell, que impedeixi el pas de les peces. El posicionament del mur és aleatori en una casella buida del taulell.</li>
+<li><strong>A un lado</strong>: Mou totes les peces del taulell una posició cap a la dreta.</li>
+<li><strong>Al otro lado</strong>: Mou totes les peces del taulell una posició cap a l'esquerra.</li>
+<li><strong>Monarca</strong>: Converteix un peó aleatori en reina.</li>
+<li><strong>Reposición</strong>: Reposiciona totes les peces del taulell. Mantenint les posicions originals de les peces.</li>
+<li><strong>Ascenso</strong>: Converteix un peó aleatori en torre, alfil o cavall.</li>
+</ul>
+<p>El disseny de les cartesha estat condicionat per el temps i la dificultat per implementar funcionaments més complexes. En cas de seguir el desenvolupament del joc, es revisaria el disseny de les cartes per aconseguir un joc més equilibrat i divertit.</p>
+<h3 id="regles"><strong>Regles</strong></h3>
+<p>Les regles del joc són les següents:</p>
+<ol>
+<li>Un jugador guanya quan el rei del contrincant és capturat.</li>
+<li>Els jugadors es mouen alternativament, com en els escacs normals. (A no ser que una carta ho impedeixi)</li>
+<li>Es fa una selecció aleatòria del color de les peces de cada jugador.</li>
+<li>Cada jugador comença amb 5 cartes. No s'obtindran més cartes durant la partida.</li>
+<li>En el seu torn, un jugador pot fer servir totes les cartes que vulgui, quan mou una peça, s'acabarà el seu torn.
+<ul>
+<li>El motiu per aquesta decisió és que els jugadors tinguin més llibertat a l'hora de jugar, i puguin fer estratègies més complexes. Però ja que no es poden aconseguir més cartes durant la partida, els jugadors han de pensar molt bé quan fer servir les cartes, perquè si les fan servir totes al principi, no tindran cap carta per a fer servir durant la partida.</li>
+</ul>
+</li>
+<li>Es fa una selecció aleatòria de les cartes. Els jugadors juguen amb les mateixes cartes i saben quines cartes té el contrincant.
+<ul>
+<li>El motiu que els jugadors tinguin les mateixes cartes és perquè el joc sigui més equilibrat. Els escacs ja són un joc molt equilibrat, i amb les cartes, es poden fer moltes estratègies, però si cada jugador té cartes diferents, pot ser que un jugador tingui cartes molt millors que l'altre, i això desequilibraria el joc i aniria en contra de l'essència dels escacs, que en tot moment sabem quines peces té el contrincant i quins moviments pot fer. L'afegiment de les cartes és per a fer el joc més divertit, i perquè els jugadors puguin fer estratègies diferents, però mantenint aquesta essència.</li>
+</ul>
+</li>
+<li>Cada jugador té 5 minuts per a jugar la partida. Si un jugador es queda sense temps, perd la partida.</li>
+</ol>
+<hr>
+<h2 id="seguiment-diari">Seguiment diari</h2>
+<p>En aquest seguiment no s'han inclòs les hores dedicades a la documentació, ja que aquesta s'ha anat realitzant al llarg del projecte, i no s'ha dedicat un temps específic a ella. Així doncs, aquest seguiment només inclou les hores dedicades al desenvolupament del joc i aspectes tècnics relacionats amb el projecte.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>EDUARDO</strong></th>
+<th><strong>SERGI</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>02/03/2023</td>
+<td>Inici del desenvolupament de la heurística del joc 2d (consola).</td>
+<td>Desenvolupament heurístic de la llar a la consola</td>
+</tr>
+<tr>
+<td>03/03/2023</td>
+<td>Acabat lògic en joc 2D.</td>
+<td>Acabat lògic en el joc 2D (consola).</td>
+</tr>
+<tr>
+<td>09/03/2023</td>
+<td>Programació de jocs a la consola, implementant torns i jaques</td>
+<td>Programació de jocs a la consola, implementant torns i jaques</td>
+</tr>
+<tr>
+<td>10/03/2023</td>
+<td>Joc a la consola semiterminada</td>
+<td>Joc a la consola semiterminada</td>
+</tr>
+<tr>
+<td>16/03/2023</td>
+<td>El darrer joc de detalls a la consola</td>
+<td>El darrer joc de detalls a la consola</td>
+</tr>
+<tr>
+<td>23/03/2023</td>
+<td>Proves de consola.</td>
+<td>Joc a la consola funcional</td>
+</tr>
+<tr>
+<td>24/03/2023</td>
+<td>Inici del desenvolupament en la cerca de la unitat i la informació</td>
+<td>Pla de negocis</td>
+</tr>
+<tr>
+<td>30/03/2023</td>
+<td>Desenvolupament en unitat. Implementació del sistema d'entrada</td>
+<td>Pla de negocis</td>
+</tr>
+<tr>
+<td>31/03/2023</td>
+<td>Desenvolupament en unitat. Proves amb el sistema d’entrada</td>
+<td>Pla de negocis</td>
+</tr>
+<tr>
+<td>13/04/2023</td>
+<td>Desenvolupament en unitat. Implementació de la lògica del joc a la consola de gràfics.</td>
+<td>Cerqueu l'operació en línia</td>
+</tr>
+<tr>
+<td>14/04/2023</td>
+<td>Desenvolupament en unitat. Desenvolupament de la lògica del joc.</td>
+<td>Primers intents en línia, provant el riptide del codi net, etc.</td>
+</tr>
+<tr>
+<td>20/04/2023</td>
+<td>Desenvolupament en unitat. Desenvolupament de la lògica del joc.</td>
+<td>Buscant altres maneres de fer en línia</td>
+</tr>
+<tr>
+<td>21/04/2023</td>
+<td>Desenvolupament en unitat. Desenvolupament de la lògica del joc.</td>
+<td>Prova Unity Mongo DB Realms</td>
+</tr>
+<tr>
+<td>02/05/2023</td>
+<td>Cerca d'informació i implementació d'un sistema de targeta inicial.</td>
+<td>Realms de MongoDB</td>
+</tr>
+<tr>
+<td>03/05/2023</td>
+<td>Desenvolupament del sistema de targetes.</td>
+<td>Prova en instància antiga del joc d’implementació de la línia</td>
+</tr>
+<tr>
+<td>04/05/2023</td>
+<td>Desenvolupament del sistema de targetes.</td>
+<td>MongoDB Realms Semi Running Online (codificat dur)</td>
+</tr>
+<tr>
+<td>05/05/2023</td>
+<td>Desenvolupament del sistema de targetes.</td>
+<td>Els regnes de MongoDB treballen perfectament entre 2 dispositius</td>
+</tr>
+<tr>
+<td>08/05/2023</td>
+<td>Implementació del sistema en línia amb l'estat actual del desenvolupament del joc.</td>
+<td>Primer intent de implementació de MongoDB Realms al joc a l'estat actual</td>
+</tr>
+<tr>
+<td>09/05/2023</td>
+<td>Proves, ajustaments i canvis en relació amb la connectivitat del joc.</td>
+<td>Implementació de la nova configuració de bases de dades de l'esquema I als regnes de MongoDB</td>
+</tr>
+<tr>
+<td>10/05/2023</td>
+<td>Proves, ajustaments i canvis en relació amb la connectivitat del joc.</td>
+<td>MongoDB Realms treballant al joc (codificat dur)</td>
+</tr>
+<tr>
+<td>11/05/2023</td>
+<td>Revisió del sistema de targetes en relació amb el sistema en línia.</td>
+<td>Mètode de generació de Realms MongoDB Eliminació de codis durs</td>
+</tr>
+<tr>
+<td>12/05/2023</td>
+<td>Creació d'un sistema &quot;unit&quot;.</td>
+<td>Connecteu els elements i corregiu els errors de connexió entre dispositius</td>
+</tr>
+<tr>
+<td>13/05/2023</td>
+<td>Proves amb el sistema de creació/cerca.</td>
+<td>El darrer detall de la reproducció, una mica de música per evitar errors, etc.</td>
+</tr>
+<tr>
+<td>14/05/2023</td>
+<td>Revisió dels menús, ajustaments i sistemes que interactuen amb el jugador.</td>
+<td>Pla de negocis</td>
+</tr>
+<tr>
+<td>15/05/2023</td>
+<td>Revisió de jocs i funcionalitats mecànics.</td>
+<td>Ressenyes finals i prepareu l'exposició</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="conclusions">Conclusions</h2>
+<p>Al llarg del desenvolupament del projecte tant en Sergi com jo hem après moltes coses, tant de Unity com de MongoDB, i hem pogut veure com és el desenvolupament d'un projecte de programació en grup, em pogut veure les dificultats que comporta, i com s'han de solucionar.</p>
+<p>Hem tingut manetjar el temps i l'esforç que hem dedicat a les diferents parts del projecte, seber quan dedicar més temps a una part i quan a una altra, i com hem de distribuir el temps per a que el projecte estigui acabat a temps. Per desgracia no hem pogut realitzar tot el que voliem, ni impementar les mecàniques que havíem envisionat, però hem intentat fer el màxim possible.</p>
+<p>Tot i així, estem molt contents amb el resultat. D'haver tingut l'oportunitat d'aprendre i aplicar nous coneixements. I d'haver pogut realitzar un projecte que ens agrada.</p>
+<hr>
+<h2 id="bibliografia">Bibliografia</h2>
+<ul>
+<li><strong>Unity Manual</strong>: la documentació oficial de Unity, que cobreix tots els aspectes del desenvolupament de jocs en Unity. Disponible a <a href="https://docs.unity3d.com/Manual/index.html">https://docs.unity3d.com/Manual/index.html</a></li>
+<li><strong>StackOverflow</strong>: un lloc web de preguntes i respostes sobre programació, que pot ser útil per a resoldre problemes específics en el desenvolupament del projecte. Disponible a <a href="https://stackoverflow.com/">https://stackoverflow.com/</a></li>
+<li><strong>Unity Answers</strong>: un lloc web de preguntes i respostes sobre programació en Unity, que pot ser útil per a resoldre problemes específics en el desenvolupament del projecte. Disponible a <a href="https://answers.unity.com/index.html">https://answers.unity.com/index.html</a></li>
+<li><strong>Brackeys</strong>: Youtuber que fa tutorials de Unity. Disponible a <a href="https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA">https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA</a></li>
+<li><strong>MongoDB Manual</strong>: la documentació oficial de MongoDB, que cobreix tots els aspectes de la base de dades MongoDB. Disponible a <a href="https://docs.mongodb.com/manual/">https://docs.mongodb.com/manual/</a></li>
+<li><strong>MongoDb Realm Docs</strong>: la documentació oficial per a treballar amb MongoDB Realms, que explica com interactuar desde alguna app amb la base de dades, trigger, endpoints i com fer les sincronitzacions realmtime. Disponible a <a href="https://www.mongodb.com/docs/realm/">https://www.mongodb.com/docs/realm/</a></li>
+</ul>
+<hr>
+<h2 id="comentari-personal">Comentari Personal</h2>
+<p>Dur a terme aquest projecte ha estat una experiència molt enriquidora, ja que ens ha permès aprendre moltes coses, com per exemple, el funcionament de les bases de dades no relacionals, com el MongoDB, o com fer un joc en línia, amb un servidor propi, i com fer que aquest servidor es comuniqui amb el joc, i aquest amb la base de dades. També ens ha permès millorar els nostres coneixements del motor de videojocs Unity, ja que hem pogut fer un joc quasi complet, amb unes mecàniques molt concretes, i amb unes interfícies molt ben definides.</p>
+<p>Tant jo (Eduardo Morell) com el meu company (Sergi Díaz) estem molt satisfets amb el resultat del projecte, perquè a pesar de què no hem pogut completar la visió original, hem pogut fer un joc molt divertit, i que té molt de potencial. Si tinguéssim més temps, podríem acabar-lo, polir-lo i publicar-lo a la plataforma de Google Play Store, per a que tothom pogués jugar-hi.</p>
+
+        
+        
+    </body>
+    </html>
