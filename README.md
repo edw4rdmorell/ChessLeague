@@ -17,11 +17,11 @@ Podeu trobar la memòria a [Aquí](Documentaci%C3%B3/Documentacion.md).
 
 ### Presentació
 
-Podeu trobar la presentació a [Aquí](Documentaci%C3%B3/Presentaci%C3%B3.pdf).
+Podeu trobar la presentació a [Aquí](Documentaci%C3%B3/Presentacio.pdf).
 
 ### Manual d'usuari
 
-Podeu trobar el manual d'usuari a [Aquí](Documentaci%C3%B3/Manual%20d'usuari.md).
+Podeu trobar el manual d'usuari a [Aquí](Documentaci%C3%B3/ManulUsuari.md).
 
 ### Pla d'empresa
 
