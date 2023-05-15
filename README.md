@@ -1,6 +1,6 @@
 # ChessLeague
 
-![Crown](Assets/Images/crown.ong)
+![Crown](./Assets/Images/crown.png)
 
 - [ChessLeague](#chessleague)
   - [Documents](#documents)
