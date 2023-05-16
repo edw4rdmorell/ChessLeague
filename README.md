@@ -27,3 +27,7 @@ Podeu trobar el manual d'usuari a [Aquí](Documentaci%C3%B3/ManualUsuari.md).
 ### Pla d'Empresa
 
 Podeu trobar el pla d'empresa a [Aquí](Documentaci%C3%B3/Plaempresa.pdf).
+
+### Apk Joc
+
+Podeu trobar el apk del joc a [Aquí](APKs/ChessLeague.apk).
