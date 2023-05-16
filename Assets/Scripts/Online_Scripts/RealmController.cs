@@ -404,27 +404,6 @@ public class RealmController : MonoBehaviour
         return (string)gameData.Board.BlackPlayerId;
     }
 
-    public static string LlenarStringTablero(int[,] tablero)
-    {
-        string stringBoard = "";
-
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                if (j == 7 && i == 7)
-                {
-                    stringBoard += tablero[i, j].ToString();
-                }
-                else
-                {
-                    stringBoard += tablero[i, j].ToString() + ",";
-                }
-            }
-        }
-        return stringBoard;
-    }
-
     public void UploadBoard(string value)
     {
         GameDataDB gameData = GetOrCreateData();
@@ -550,6 +529,27 @@ public class RealmController : MonoBehaviour
             gameData.Board.Turn = turn;
             gameData.Board.Turns += 1;
         });
+    }
+
+    public static string LlenarStringTablero(int[,] tablero)
+    {
+        string stringBoard = "";
+
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (j == 7 && i == 7)
+                {
+                    stringBoard += tablero[i, j].ToString();
+                }
+                else
+                {
+                    stringBoard += tablero[i, j].ToString() + ",";
+                }
+            }
+        }
+        return stringBoard;
     }
 
     public bool LoadedGame()
